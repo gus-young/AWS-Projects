@@ -1,8 +1,8 @@
 ---
+icon: network-wired
 description: >-
   Project to build two VPCs connected via a peering connection with static
   routes, using Terraform.
-icon: network-wired
 ---
 
 # Project 1 - AWS Networking
@@ -16,5 +16,7 @@ The purpose of the project is to practice using Terraform to create IAC environm
 Below you will see the network diagram for the end state of the project. The connection to the internet at large is purely for SSH connections in to the EC2 instances, as the goal of the project will be for the EC2 instances to ping each other via private IP addresses.&#x20;
 
 <figure><img src=".gitbook/assets/AWS TEST VPC1-VPC2 Connection.drawio.png" alt=""><figcaption><p>Fig 1. Network diagram of proposed project.</p></figcaption></figure>
+
+Below is the Terraform code for the implementation of this project. This code is not optimized with variables. Variables will be applied on a future project.&#x20;
 
 {% @github-files/github-code-block url="https://github.com/gus-young/AWS-Projects/blob/cbe25ac03c293880a70c4fa4519ceb9f165bc032/test.tf#L1" %}
