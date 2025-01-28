@@ -19,4 +19,4 @@ Below you will see the network diagram for the end state of the project. The con
 
 Below is the Terraform code for the implementation of this project. This code is not optimized with variables. Variables will be applied on a future project.&#x20;
 
-{% @github-files/github-code-block url="https://github.com/gus-young/AWS-Projects/blob/cbe25ac03c293880a70c4fa4519ceb9f165bc032/test.tf#L1" %}
+{% @github-files/github-code-block url="https://github.com/gus-young/AWS-Projects/blob/19bc57374cfd8987c8b2f1deb4c7db41988c9c55/project_1.tf" %}
