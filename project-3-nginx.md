@@ -1,2 +1,6 @@
-# Project 3 - Nginx
+---
+hidden: true
+---
+
+# Project  - Nginx
 
