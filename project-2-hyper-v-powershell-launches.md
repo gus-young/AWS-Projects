@@ -26,15 +26,12 @@ Looking specifically at lab\_launch.ps1
 
 This pulls the variables from the JSON file:&#x20;
 
-````powershell
 ```powershell
 $data = Get-Content -Path ".\lab_variables.json" -Raw | ConvertFrom-Json
 ```
-````
 
 This sets the parameters for the VM that is created by Hyper-V
 
-````powershell
 ```powershell
 #VM Variables
 $vm_name = $data.vm_name
@@ -43,11 +40,9 @@ $memory_size = 8GB
 $cpu_size = 4
 $vm_gen = 2
 ```
-````
 
 To ensure the launch doesn't throw errors, this checks for vhdx files or VMs that might have the same name from a previous launch. If it finds them, it delets them:&#x20;
 
-````powershell
 ```powershell
 #Step 0. Ensure previous lab was cleaned up properly
 if (Get-VM $vm_name -ErrorAction SilentlyContinue) {
@@ -57,33 +52,26 @@ if (Get-VM $vm_name -ErrorAction SilentlyContinue) {
 if (Test-Path $diff_path) {
     Remove-Item $diff_path
 }
-
 ```
-````
 
 This creates the fresh differencing disk, based off the parent disk:&#x20;
 
-````powershell
 ```powershell
 #Step 1. Create the new Diff Disk
 New-VHD -ParentPath $parent_disk -Path $diff_path -differencing
 ```
-````
 
 This creates the VM for use in the lab, using the variables from the above block. I have Secure Boot disabled, because this was built using UbuntuServer:
 
-````powershell
 ```powershell
 #Step 2. Create the VM using the Diff Disk
 New-VM -Name $vm_name -MemoryStartupBytes $memory_size -VHDPath $diff_path -Generation $vm_gen -SwitchName $switch_name 
 Set-VMProcessor -VMName $vm_name -Count: $cpu_size
 Set-VMFirmware -VMName $vm_name -EnableSecureBoot Off
 ```
-````
 
 &#x20;The next two steps launch the VM and then connect to the VM via a console window:&#x20;
 
-````powershell
 ```powershell
 #Step 3. Launch the VM
 Start-VM -Name $vm_name
@@ -91,22 +79,18 @@ Start-VM -Name $vm_name
 #Step 4. Connect to the VM
 VMConnect localhost $vm_name
 ```
-````
 
 The save\_changes.ps1 pulls variables from the JSON file as well:&#x20;
 
-````powershell
 ```powershell
 #Get Variables from JSON file
 $data = Get-Content -Path ".\lab_variables.json" -Raw | ConvertFrom-Json
 
 Merge-VHD -Path $data.diff_path -DestinationPath $data.parent_disk
 ```
-````
 
 Here is the JSON file that I use for this:&#x20;
 
-````json
 ```json
 {
     "vm_name" : "Ubuntu Lab",
@@ -114,7 +98,6 @@ Here is the JSON file that I use for this:&#x20;
     "diff_path" : "V:\\Virtual Disks\\Ubuntu Lab\\Production.vhdx"
 }
 ```
-````
 
 
 
