@@ -22,6 +22,8 @@ The basic logic of the system is this:&#x20;
 2. When the "lab\_launch.ps1" script is run, it will create a differencing disk from the parent disk. This differencing disk will function as the disk for the VM while it is running. What's super cool about this is, once the lab is shut down, the differencing disk can be deleted. The script always creates a new differencing disk from the parent on each launch, so the lab will ALWAYS start in the state you intend.&#x20;
 3. The save\_changes.ps1 script allows you to make updates to the original state of the lab. Say you decide down the road that you want the student to start in a different spot, or you have to run some security updates on the VM, the save\_changes.ps1 merges the differencing disk with the parent disk. Be careful what changes you merge, because you will have to start over if you merge the wrong thing.&#x20;
 
+I ultimately used ps2exe to convert these scripts into executable files, so that I didn't have to right-click>"run in PowerShell" every time.&#x20;
+
 Looking specifically at lab\_launch.ps1
 
 This pulls the variables from the JSON file:&#x20;
